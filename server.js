@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const connect = require('./mongodb.js');
-const axios = require('axios');
 
 const swaggerInit = require('./swagger/swaggerInit.js');
 
