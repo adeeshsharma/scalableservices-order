@@ -1,0 +1,15 @@
+components:
+  schemas:
+    Order:
+      type: object
+      required:
+        - userId
+        - productId
+      properties:
+        userId:
+          type: string
+        productId:
+          type: string
+      example:
+        userId: 1234
+        productId: 5678

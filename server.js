@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const connect = require('./mongodb.js');
 
+const swaggerInit = require('./swagger/swaggerInit.js');
+
 connect();
 
 const Order = mongoose.model('Order', {
@@ -14,6 +16,8 @@ const Order = mongoose.model('Order', {
 const app = express();
 app.use(bodyParser.json());
 
+swaggerInit(app);
+
 app.get('/orders', async (req, res) => {
   try {
     const orders = await Order.find();
@@ -23,9 +27,9 @@ app.get('/orders', async (req, res) => {
   }
 });
 
-app.get('/order/:id', async (req, res) => {
+app.get('/order/:idToGet', async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.params.idToGet;
     const order = await Order.findById(id);
     res.json(order);
   } catch (err) {
@@ -44,12 +48,12 @@ app.post('/order', async (req, res) => {
   }
 });
 
-app.put('/order/:id', async (req, res) => {
+app.put('/order/:idToUpdate', async (req, res) => {
   try {
-    const { id } = req.params;
+    const { idToUpdate } = req.params;
     const { userId, productId } = req.body;
     const order = await Order.findByIdAndUpdate(
-      id,
+      idToUpdate,
       { userId, productId },
       { new: true }
     );
@@ -59,10 +63,10 @@ app.put('/order/:id', async (req, res) => {
   }
 });
 
-app.delete('/order/:id', async (req, res) => {
+app.delete('/order/:idToDelete', async (req, res) => {
   try {
-    const { id } = req.params;
-    await Order.findByIdAndDelete(id);
+    const { idToDelete } = req.params;
+    await Order.findByIdAndDelete(idToDelete);
     res.sendStatus(204);
   } catch (err) {
     console.log(err.message);
