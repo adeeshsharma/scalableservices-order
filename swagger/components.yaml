@@ -2,14 +2,42 @@ components:
   schemas:
     Order:
       type: object
-      required:
-        - userId
-        - productId
+      properties:
+        _id:
+          type: string
+        userId:
+          $ref: '#/components/schemas/User'
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    OrderCreate:
+      type: object
       properties:
         userId:
           type: string
-        productId:
+        productIds:
+          type: array
+          items:
+            type: string
+      required:
+        - userId
+        - productIds
+    User:
+      type: object
+      properties:
+        _id:
           type: string
-      example:
-        userId: 1234
-        productId: 5678
+        name:
+          type: string
+        email:
+          type: string
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
