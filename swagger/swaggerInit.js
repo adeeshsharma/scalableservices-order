@@ -17,7 +17,7 @@ function swaggerInit(appInstance) {
     definition: {
       openapi: '3.0.0',
       info: {
-        title: 'Order API',
+        title: 'Orders API',
         version: '1.0.0',
         description: 'An API to manage orders',
       },
